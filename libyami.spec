@@ -4,7 +4,7 @@
 #
 Name     : libyami
 Version  : 1.1.0
-Release  : 3
+Release  : 4
 URL      : https://github.com/01org/libyami/archive/libyami-1.1.0.tar.gz
 Source0  : https://github.com/01org/libyami/archive/libyami-1.1.0.tar.gz
 Summary  : yami based v4l2 plugin
