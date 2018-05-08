@@ -4,7 +4,7 @@
 #
 Name     : libyami
 Version  : 1.3.0
-Release  : 7
+Release  : 8 
 URL      : https://github.com/01org/libyami/archive/1.3.0.tar.gz
 Source0  : https://github.com/01org/libyami/archive/1.3.0.tar.gz
 Summary  : Intel open source media infrastructure base on libva.
@@ -49,8 +49,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1518802903
-%autogen --disable-static
+export SOURCE_DATE_EPOCH=1525812963
+%autogen --disable-static --enable-vp9dec \
+--enable-vp9enc \
+--enable-h265enc \
+--enable-h265dec \
+--enable-jpegenc \
+--enable-vp8enc \
+--enable-dmabuf
 make  %{?_smp_mflags}
 
 %check
@@ -61,7 +67,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1518802903
+export SOURCE_DATE_EPOCH=1525909840
 rm -rf %{buildroot}
 %make_install
 

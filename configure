@@ -1,0 +1,7 @@
+--enable-vp9dec
+--enable-vp9enc
+--enable-h265enc
+--enable-h265dec
+--enable-jpegenc
+--enable-vp8enc
+--enable-dmabuf
