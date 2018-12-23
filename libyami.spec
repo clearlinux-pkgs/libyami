@@ -4,9 +4,9 @@
 #
 Name     : libyami
 Version  : 1.3.1
-Release  : 9
-URL      : https://github.com/01org/libyami/archive/1.3.1.tar.gz
-Source0  : https://github.com/01org/libyami/archive/1.3.1.tar.gz
+Release  : 10
+URL      : https://github.com/intel/libyami/archive/1.3.1.tar.gz
+Source0  : https://github.com/intel/libyami/archive/1.3.1.tar.gz
 Summary  : Intel open source media infrastructure base on libva.
 Group    : Development/Tools
 License  : Apache-2.0 BSD-3-Clause
@@ -59,7 +59,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1542229918
+export SOURCE_DATE_EPOCH=1545591576
 %autogen --disable-static --enable-vp9dec \
 --enable-vp9enc \
 --enable-h265enc \
@@ -77,7 +77,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1542229918
+export SOURCE_DATE_EPOCH=1545591576
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libyami
 cp LICENSE.md %{buildroot}/usr/share/package-licenses/libyami/LICENSE.md
@@ -115,7 +115,7 @@ cp gtestsrc/gtest/LICENSE %{buildroot}/usr/share/package-licenses/libyami/gtests
 /usr/lib64/libyami.so.1.3.1
 
 %files license
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/package-licenses/libyami/LICENSE.md
 /usr/share/package-licenses/libyami/codecparsers_dboolhuff.LICENSE
 /usr/share/package-licenses/libyami/codecparsers_vp9quant.LICENSE
