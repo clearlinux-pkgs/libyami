@@ -4,7 +4,7 @@
 #
 Name     : libyami
 Version  : 1.3.1
-Release  : 10
+Release  : 11
 URL      : https://github.com/intel/libyami/archive/1.3.1.tar.gz
 Source0  : https://github.com/intel/libyami/archive/1.3.1.tar.gz
 Summary  : Intel open source media infrastructure base on libva.
