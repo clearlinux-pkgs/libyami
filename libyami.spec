@@ -4,7 +4,7 @@
 #
 Name     : libyami
 Version  : 1.3.1
-Release  : 11
+Release  : 12
 URL      : https://github.com/intel/libyami/archive/1.3.1.tar.gz
 Source0  : https://github.com/intel/libyami/archive/1.3.1.tar.gz
 Summary  : Intel open source media infrastructure base on libva.
@@ -29,6 +29,7 @@ Summary: dev components for the libyami package.
 Group: Development
 Requires: libyami-lib = %{version}-%{release}
 Provides: libyami-devel = %{version}-%{release}
+Requires: libyami = %{version}-%{release}
 
 %description dev
 dev components for the libyami package.
@@ -53,13 +54,22 @@ license components for the libyami package.
 
 %prep
 %setup -q -n libyami-1.3.1
+cd %{_builddir}/libyami-1.3.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1545591576
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604353653
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %autogen --disable-static --enable-vp9dec \
 --enable-vp9enc \
 --enable-h265enc \
@@ -70,20 +80,20 @@ export SOURCE_DATE_EPOCH=1545591576
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1545591576
+export SOURCE_DATE_EPOCH=1604353653
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libyami
-cp LICENSE.md %{buildroot}/usr/share/package-licenses/libyami/LICENSE.md
-cp codecparsers/dboolhuff.LICENSE %{buildroot}/usr/share/package-licenses/libyami/codecparsers_dboolhuff.LICENSE
-cp codecparsers/vp9quant.LICENSE %{buildroot}/usr/share/package-licenses/libyami/codecparsers_vp9quant.LICENSE
-cp gtestsrc/gtest/LICENSE %{buildroot}/usr/share/package-licenses/libyami/gtestsrc_gtest_LICENSE
+cp %{_builddir}/libyami-1.3.1/LICENSE.md %{buildroot}/usr/share/package-licenses/libyami/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/libyami-1.3.1/codecparsers/dboolhuff.LICENSE %{buildroot}/usr/share/package-licenses/libyami/4dbe7c1f3a1833a88333a7c282119323e9ef44fa
+cp %{_builddir}/libyami-1.3.1/codecparsers/vp9quant.LICENSE %{buildroot}/usr/share/package-licenses/libyami/e9e216e41252f23ea09d1377ed8b9061db7db903
+cp %{_builddir}/libyami-1.3.1/gtestsrc/gtest/LICENSE %{buildroot}/usr/share/package-licenses/libyami/5a2314153eadadc69258a9429104cd11804ea304
 %make_install
 
 %files
@@ -116,7 +126,7 @@ cp gtestsrc/gtest/LICENSE %{buildroot}/usr/share/package-licenses/libyami/gtests
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libyami/LICENSE.md
-/usr/share/package-licenses/libyami/codecparsers_dboolhuff.LICENSE
-/usr/share/package-licenses/libyami/codecparsers_vp9quant.LICENSE
-/usr/share/package-licenses/libyami/gtestsrc_gtest_LICENSE
+/usr/share/package-licenses/libyami/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+/usr/share/package-licenses/libyami/4dbe7c1f3a1833a88333a7c282119323e9ef44fa
+/usr/share/package-licenses/libyami/5a2314153eadadc69258a9429104cd11804ea304
+/usr/share/package-licenses/libyami/e9e216e41252f23ea09d1377ed8b9061db7db903
